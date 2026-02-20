@@ -1,0 +1,35 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:15
+    container_name: productdb
+    environment:
+      POSTGRES_DB: productmanagement   # <-- database will be created
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - productdb-data:/var/lib/postgresql/data
+
+  app:
+    build: .
+    image: productapi:latest
+    container_name: productrestapi
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/productmanagement
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_JPA_SHOW_SQL: "true"
+      JWT_SECRET: 3pW9X2qYtLk8vNf7Rz1mQe6UcJb4HsDaT9yVrPw2KxGf8LdZc7BnMsQh5TjKuEaY4rFpWzNxCvRtUqLmYk9DsH==
+      JWT_EXPIRATION: 900000
+      JWT_REFRESH_EXPIRATION: 604800000
+    depends_on:
+      - db
+
+volumes:
+  productdb-data:
