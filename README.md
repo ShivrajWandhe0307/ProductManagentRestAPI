@@ -37,7 +37,7 @@ Layered Architecture:
 --------------------------------------------------
 
 1. Login using:
-   POST /api/auth/login
+   POST /api/users/login
 
 2. JWT token is generated.
 
@@ -89,7 +89,7 @@ http://localhost:8080/swagger-ui/index.html
    http://localhost:8080/swagger-ui/index.html
 
 2. Call:
-   POST /api/auth/login
+   POST /api/users/login
 
 3. Copy the token from response.
 
@@ -139,15 +139,17 @@ Port: 5432
 
 Authentication:
 
-POST /api/auth/register
-POST /api/auth/login
+POST /api/users/register
+POST /api/users/login
 
 Products:
 
-GET    /api/products
-POST   /api/products
-PUT    /api/products/{id}
-DELETE /api/products/{id}
+GET    /api/v1/products/{id}
+GET    /api/v1/products/{id}/items
+GET    /api/v1/products
+POST   /api/v1/products
+PUT    /api/v1/products/{id}
+DELETE /api/v1/products/{id}
 
 --------------------------------------------------
 📖 API DOCUMENTATION
